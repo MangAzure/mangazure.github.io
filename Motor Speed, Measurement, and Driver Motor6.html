@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Website Design - Easy Tutorials</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Motor Speed, Measurement, and Driver Motor</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Motor Speed, Measurement, and Driver Motor</i></h2>
+
+            <p> ➤ <strong><i>Coding VHDL Testbench Open Loop</i></strong></p>
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-6-1.png" style="width: 80%">
+                </div>
+                <div class="vga-1-col">
+                    <img src="images/yazz-6-2.png" style="width: 90%">
+                </div>
+            </div>
+            <!-- <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-6-2.png" style="width: 95%">
+                </div>
+            </div> -->
+
+            <p>Pada test bench, kami menggunakan konfigurasi yang sama dengan sistem close loop, yaitu untuk nilai
+                clk_frequency dan clk_period. Karena project kali ini hanya sebagai simulasi tanpa menghubungkan dengan
+                hardware-nya langsung, maka divisi kami mengamsumsikan bahwa cahaya yang paling besar terdapat diposisi
+                arah kanan robot. Maka motor kiri robot akan bergerak ke kanan dengan kecepatan 11111111 selama 1024 ms,
+                sehingga robot akan berbelok ke kanan. Lalu, motor kiri akan berhenti dengan kecepatan 00000000 selama
+                512 uS. Setelah itu, motor kiri dan kanan akan bertambah kecepatan secara bertahap sebesar +1 setiap 1
+                periode, yaitu 512 uS. Hal ini terus berlangsung sampai dengan kecepatan motor pada kecepatan maksimum,
+                dibutuhkan waktu selama 512 uS x jumlah pulse dalam 1 periode (256), yaitu sekitar 131072 uS atau
+                131.072 ms. Setelah motor kanan dan kiri mencapai kecepatan maksimum yaitu 11111111, maka kedua motor
+                tersebut akan bergerak dengan kecepatan maksimum secara konstan selama 5120 ms. Setelah waktu 5120 ms,
+                maka robot dianggap telah sampai pada posisi cahaya yang paling terang.</p>
+
+            <br>
+            <p> ➤ <strong><i>Simulation Results Open Loop</i></strong></p>
+            <p>Berikut merupakan hasil simulasi dari test bench di atas : </p>
+            <p>- Belok kanan</p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-6-3.png" style="width: 160%">
+                </div>
+            </div>
+            <p>Motor kiri : 11111111 selama 1024 ms
+                <br> Motor kanan : 00000000 selama 0 ms
+            </p>
+            <br>
+            <p>- Bergerak maju dengan perlahan</p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-6-4.png" style="width: 160%">
+                </div>
+            </div>
+            <p>Motor kiri : 00000000 sampai 11111111 selama 131.072 ms
+                <br>Motor kanan : 00000000 sampai 11111111 selama 131.072 ms
+            </p>
+            <br>
+            <p>- Bergerak dengan kecepatan maksimum secara konstan</p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-6-5.png" style="width: 160%">
+                </div>
+            </div>
+            <p>Motor kiri : 11111111 selama 5120 ms
+                <br>Motor kanan : 11111111 selama 5120ms
+            </p>
+            <br>
+            <p>- Berhenti</p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-3-6.png" style="width: 160%">
+                </div>
+            </div>
+            <p>Motor kiri : 00000000
+                <br>Motor kanan : 00000000
+            </p>
+
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Motor Speed, Measurement, and Driver Motor5.html" class="hero-btn red-btn">Previous
+                        Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Motor Speed, Measurement, and Driver Motortable2.html" class="hero-btn red-btn">Next Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+
+</body>
+
+</html>

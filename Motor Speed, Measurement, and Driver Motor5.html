@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Website Design - Easy Tutorials</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Motor Speed, Measurement, and Driver Motor</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Motor Speed, Measurement, and Driver Motor</i></h2>
+
+            <p> ➤ <strong><i>Block Diagram Open Loop</i></strong></p>
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-5-1.png" style="width: 100%">
+                </div>
+            </div>
+
+            <p>Pada sistem open loop berdasarkan block diagram di atas, memiliki cara kerja yaitu untuk dibandingkan
+                antara nilai counter pada bagian A dan nilai dari goal speed/input speed yang diberikan pada komparator
+                bagian B.
+                Lalu dari hasil komparasi A < B,maka akan mengeluarkan out PWM dari komparator tersebut, yang dimana
+                    akan digunakan untuk mengerakkan motor driver sesuai dengan jumlah time on PWM pada periode
+                    tersebut.</p>
+
+                    <p> ➤ <strong><i>Coding VHDL Module Open Loop</i></strong></p>
+
+                    <P>Untuk coding VHDL module berdasarkan block diagram di atas adalah sebagai berikut :</P>
+                    <div class="row-vga1">
+                        <div class="vga-1-col">
+                            <img src="images/yazz-5-2.png" style="width: 100%">
+                        </div>
+                        <div class="vga-1-col">
+                            <img src="images/yazz-5-3.png" style="width: 100%">
+                        </div>
+                    </div>
+
+                    <p>Pada coding di atas, terdapat 4 input port dan 2 output port. Dimana 4 input tersebut adalah
+                        reset, duty_cycle_kanan, duty_cycle_kiri, dan clk. Sedangkan untuk 2 output adalah pwm_kanan dan
+                        pwm_kiri. Berikut adalah penjelasan lebih rinci mengenai masing - masing port :</p>
+                    <p>● <strong><i>Input</i></strong></p>
+                    <br>
+                    <p>- reset : untuk mereset variabel nilai counter dan variabel nilai high</p>
+                    <p>- duty_cycle_kanan : sebagai nilai input speed 8-bit signed binary,
+                        yang berfungsi untuk menghasilkan PWM motor kanan yang akan <br> dikirim ke driver motor.</p>
+                    <p>- duty_cycle_kiri : sebagai nilai input speed 8-bit signed binary,
+                        yang berfungsi untuk menghasilkan PWM motor kiri yang akan dikirim ke driver motor.</p>
+                    <p>- clk : untuk mengatur jalannya sistem pada rangkaian, agar semua sistem berjalan secara bersama
+                        – sama</p>
+                    <p>● <strong><i>Output</i></strong></p>
+                    <br>
+                    <p>- pwm_kanan : sebagai nilai output yang keluar dari komparator berdasarkan perbandingan antara
+                        nilai counter dan nilai duty_cycle_kanan.</p>
+                    <p>- pwm_kiri : sebagai nilai output yang keluar dari komparator berdasarkan perbandingan antara
+                        nilai counter dan nilai duty_cycle_kiri</p>
+
+                    <!-- EDITED -->
+
+                    <div class="row-vga1">
+                        <div class="vga-1-col">
+                            <a href="Motor Speed, Measurement, and Driver Motortable1.html" class="hero-btn red-btn">Previous
+                                Page</a>
+                        </div>
+                        <div class="row-vga1">
+                            <div class="vga-1-col">
+                                <a href="Motor Speed, Measurement, and Driver Motor6.html" class="hero-btn red-btn">Next Page</a>
+                            </div>
+                        </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+
+</body>
+
+</html>

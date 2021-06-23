@@ -1,0 +1,113 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Website Design - Easy Tutorials</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Motor Speed, Measurement, and Driver Motor</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Motor Speed, Measurement, and Driver Motor</i></h2>
+
+            <p> ➤ <strong><i>Coding VHDL Testbench Close Loop</i></strong></p>
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-3-1.png" style="width: 85%">
+                </div>
+                <div class="vga-1-col">
+                    <img src="images/yazz-3-2.png" style="width: 85%">
+                </div>
+            </div>
+
+            <p>Pada test bench, kami menggunakan nilai frekuensi sebesar 500000, hal ini dikarenakan kami menggunakan
+                data 8 bit, yaitu 256.
+                Dimana 256 tersebut adalah jumlah pulse dalam 1 periode, sehingga untuk frekuensi per pulse adalah
+                500000/256,
+                yaitu sekitar 2 kHz sesuai dengan kebutuhan spesifikasi motor yang dipakai. Untuk nilai clock periode,
+                kami menggunakan nilai 1000 ms / 500000, yaitu 2 us. Selain itu, kami mengamsusikan duty_cycle_kanan dan
+                duty_cycle_kiri
+                mengalami kenaikan kecepatan yang bertahap, dimulai dari 00000000 atau dalam desimal adalah 0.
+                Dimana kedua duty cycle tersebut akan terus bertambah setiap 1 periode (254 us) hingga sampai 01111111
+                atau
+                dalam desimal adalah 127 dan pada akhirnya akan stabil dengan kecepatan 01111111 dalam waktu 1000 us.
+                Lalu kembali berulang pada siklus sebelumnya.</p>
+            <br>
+            <p> ➤ <strong><i>Simulation Results Close Loop</i></strong></p>
+            <p>Berikut merupakan hasil simulasi dari test bench di atas : </p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-3-3.png" style="width: 160%">
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-3-4.png" style="width: 160%">
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-3-5.png" style="width: 160%">
+                </div>
+            </div>
+            <p>Dapat dilihat pada time on pwm kanan dan kiri,
+                dimana setiap satu periode akan menambahkan time on pada kedua pwm tersebut,
+                hingga pada duty cycle 01111111 seperti pada gambar di bawah ini :</p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-3-6.png" style="width: 160%">
+                </div>
+            </div>
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Motor Speed, Measurement, and Driver Motor2.html" class="hero-btn red-btn">Previous
+                        Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Motor Speed, Measurement, and Driver Motortable1.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+
+</body>
+
+</html>

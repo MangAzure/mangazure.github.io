@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Website Design - Easy Tutorials</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Motor Speed, Measurement, and Driver Motor</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Motor Speed, Measurement, and Driver Motor</i></h2>
+
+            <p>Pada project robot <i>seeking light</i> , divisi kami memiliki peran dalam menjalankankan motor sesuai
+                dengan data yang diberikan dari <br> divisi– divisi lain. Dimana memiliki 3 peran utama pada divisi
+                kami, yaitu : </p>
+
+            <p>1. <i>Motor Speed</i></p>
+            <p>Pada <i>motor speed</i>, divisi kami berperan dalam menjalankan speed sesuai dengan <i>input speed</i>
+                yang diberikan oleh divisi <i>speed decision</i>.
+                Dimana di dalam sistemnya, kami membuat membuat counter yang akan dikomparasikan dengan <i>input
+                    speed/duty cycle</i>. Sehingga pada output komparator akan menghasilkan PWM,
+                yang dimana pada time on-nya akan digunakan untuk mengatur kecepatan pada <i>driver motor</i>.
+                Semakin besar <i>time on-nya</i>, maka akan semakin besar juga voltage yang diberikan ke <i>driver
+                    motor</i>.</p>
+            <br>
+            <p>2. <i>Measurement</i></p>
+            <p>Pada measurement, divisi kami berperan dalam memantau <i>actual speed</i> yang terjadi pada driver motor,
+                apakah actual speed sesuai dengan <i>input speed</i> yang diberikan.
+                Nilai dari <i>actual speed</i> tersebut, akan diberikan kepada divisi <i>speed decision</i> dan control.
+                Dimana jika terdapat error antara perbedaan <i>input speed</i> dan <i>actual speed</i>.
+                Maka akan diperbaiki oleh divisi <i>speed decision</i> dan control, sampai dengan error bernilai 0.</p>
+            <br>
+            <p>3. <i>Driver Motor</i></p>
+            <p>Pada driver motor, divisi kami berperan dalam memastikan hasil nilai komparator antara <i>counter</i> dan
+                <i>input speed</i>,
+                tidak terjadi masalah dan dapat diberikan pada driver motor.
+                Dimana dengan nilai tersebut akan menjalankan motor sesuai dengan nilai pwm yang diberikan.</p>
+            <br>
+            <p>Berhubung pada project kali ini tidak diimplementasikan pada hardware-nya langsung, sehingga divisi
+                <i>motor direction, speed decision, dan control</i> tidak dapat menerima feedback serta juga tidak dapat
+                membuat driver motor bergerak mundur.
+                Maka pada divisi kami yaitu divisi motor speed, measurement, dan driver motor, akan membuat 2 versi
+                rangkaian sistem. Dimana sistem rangkaian pertama adalah sistem close loop dan sistem rangkaian kedua
+                adalah sistem open loop.
+                Pada implementasi project kali ini sistem open loop yang digunakan, karena kesepakatan dengan divisi -
+                divisi lainnya. </p>
+            <br>
+            <br>
+            <h2> ➤ <strong><i>Block Diagram Close Loop</i></strong></h2>
+            <p>Untuk lebih jelasnya, berikut merupakan blok diagram kerja dari divisi kami :</p>
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yazz-1-1.png" style="width: 100%">
+                </div>
+            </div>
+            <p>Untuk cara kerja dari blok diagram divisi kami, dimulai dari input speed yang diberikan oleh divisi motor
+                direction, speed decision, dan control. Setelah itu divisi mereka akan mengubah input speed tersebut ke
+                dalam tipe data 8 bit signed binary. Lalu data tersebut akan dikomparasikan pada bagian B.Sementara itu,
+                divisi kami membuat counter 8 bit, tetapi karena tipe data yang dikomparasikan pada bagian B adalah 8
+                bit signed binary. Maka kami membaginya menjadi 7 bit positif dan 7 bit negatif, yaitu 0 sampai – 128
+                dan 0 sampai 127. Jika nilai input speed lebih dari 0, maka nilai counter yang dihitung adalah dari 0
+                sampai 127, sedangkan jika nilai input speed kurang dari 0, maka nilai counter yang dihitung adalah dari
+                0 sampai -128. </p>
+            <p>Setelah didapatkan antara nilai input lebih dari 0 atau kurang dari 0, maka nilai counter tersebut akan
+                dimasukkan ke dalam komparator bagian B. Pada komparator nilai dari A dan nilai dari B akan dibandingkan
+                dengan syarat A < B. Kita asumsikan jika nilai input speed adalah 01000000 atau dalam desimal adalah 64,
+                    pada periode tersebut. Maka syarat komparator yang terpenuhi untuk high dengan syarat A < B adalah 0
+                    – 63 atau terdapat 64 pulse yang bernilai ON dan sisanya bernilai off. Maka duty cycle time on yang
+                    dihasilkan adalah 64/127 *100, yaitu kurang lebih 50 %. Dimana dengan duty cycle 50 % tersebut,
+                    nilai voltage akan dikalikan dengan duty cyle. </p>
+                    <p>Dari hasil perkalian tersebut, kita mendapatkan nilai voltage yang sudah diatur melalui
+                        komparator, dimana nilai voltage tersebut akan diberikan pada driver motor untuk bergerak.
+                        Setelah driver motor telah bergerak, speed sensor yang berfungsi sebagai feedback, akan memantau
+                        pergerakan driver motor per satu periode. Dimana nilai feedback tersebut akan dikirimkan kembali
+                        pada divisi motor direction, speed decision, dan control untuk dibandingkan apakah terdapat
+                        error antara input speed/goal speed dengan actual speed. Jika terdapat error, maka akan
+                        diperbaiki sampai error menjadi tidak ada atau 0.</p>
+
+                    <!-- EDITED -->
+
+                    <div class="row-vga1">
+                        <div class="vga-1-col">
+                            <a href="index.html" class="hero-btn red-btn">HOME</a>
+                        </div>
+                        <div class="row-vga1">
+                            <div class="vga-1-col">
+                                <a href="Motor Speed, Measurement, and Driver Motor2.html" class="hero-btn red-btn">Next
+                                    Page</a>
+                            </div>
+                        </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>
