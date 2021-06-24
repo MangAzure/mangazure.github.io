@@ -1,0 +1,177 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi VGA Display</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Landasan Teori</i></h2>
+            <br>
+
+            <p> ➤ <strong><i>Clock Signal</i></strong></p>
+            <br>
+            <P>Sinyal clock didefiniskan sebagai jenis sinyal tertentu yang berosilasi antara status tinggi dan rendah.
+                Sinyal bertindak seperti metronom, yang diikuti rangkaian digital pada waktunya untuk mengoordinasikan
+                urutan tindakannya. Sirkuit digital mengandalkan sinyal jam untuk mengetahui kapan dan bagaimana
+                menjalankan fungsi yang diprogram (Wojciechowicz, 2018). </P>
+            <br>
+            <p>Sinyal clock ini ditunjukkan pada gambar berikut.</p>
+
+            <br>
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/lan1.jpg" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Clock speed setara dengan pergerakan data dalam aplikasi yang menerima dan memproses ratusan megabyte
+                data setiap detik. Aplikasi yang terlibat dalam memindahkan volume data yang sangat besar termasuk
+                stasiun pangkalan seluler dan prosesor backhaul, sistem pencitraan medis, dan instrumen uji
+                laboratorium. Aplikasi ini bergantung pada penerima yang dapat mengenali beberapa data dalam satu aliran
+                dan mereka bergantung pada sirkuit waktu presisi untuk mengirim dan mengekstrak sinyal jam utama
+                (Design, Electronic, 2016).</p>
+            <br>
+            <p> ➤ <strong><i>Clock Generator</i></strong></p>
+            <br>
+            <p>Clock generator menggabungkan osilator dengan satu atau lebih PLL, pembagi keluaran, dan buffer keluaran.
+                Clock generator dan buffer jam berguna ketika beberapa frekuensi diperlukan dan IC target berada di
+                board/FPGA yang sama . Dalam beberapa aplikasi, FPGA / ASIC memiliki banyak domain waktu untuk jalur
+                data, bidang kontrol, dan memory controller interface, dan sebagai hasilnya, memerlukan beberapa
+                frekuensi referensi yang unik. Dalam kebanyakan kasus, osilator berada di luar clock generator, meskipun
+                menjadi lebih umum bahwa osilator digabungkan ke dalam paket yang sama dengan clock generator dalam
+                upaya untuk mengkonsolidasikan tagihan biaya material dan kompleksitas, di samping keuntungan lainnya.
+                Ada berbagai jenis clock generator dan masing-masing dioptimalkan untuk kinerja dan target biaya yang
+                berbeda tergantung pada aplikasinya.</p>
+            <br>
+            <p> ➤ <strong><i>Comparator Digital</i></strong></p>
+            <br>
+            <p>Rangkaian komparator adalah satu jenis untuk menerapkan pada rangkaian kombinasional yang mempunyai
+                fungsi utama membandingkan dua data digital. Hasil perbandingan itu akan mempunyai hasil sama, lebih
+                kecil, atau lebih besar. Komparator banyak digunakan dalam kehidupan sehari-hari seperti pada mesin
+                penyeleksi surat, baik ukuran dimensinya, berat surat, kode area (berdasarkan bar-code), dsb
+                (Trisnawati, 2016). </p>
+            <br>
+            <p>Dari dua data digital yang hanya terdiri dari 1bit yang dibandingkan, maka akan dapat diperluas menjadi
+                dua data digital yang terdiri dari lebih dari 1 bit seperti dua bit, tiga bit, dst. Ada dua jenis utama
+                dari Digital komparator yaitu:</p>
+            <br>
+            <p>1. Pembanding Identitas (Identity Comparator): Komparator digital yang hanya memiliki satu terminal
+                output ketika A=B baik “Tinggi” A=B=1 atau “Low” A=B=0</p>
+            <br>
+            <p>Besaran Komparator (Magnitude Comparator) : Komparator digital yang memiliki tiga terminal output,
+                masing-masing untuk kesetaraan A = B lebih besar dari , A>B, dan kurang dari A lebih kecil B (Hutahaean,
+                n.d.)</p>
+            <br>
+            <p> ➤ <strong><i>Counter Digital</i></strong></p>
+            <br>
+            <p>Counter merupakan salah satu rangkaian pada elektronika digital yang menggunakan urutan logika digital
+                yang dipicu dengan clock (rangkaian sekuensial). Counter biasanya untuk menghitung dalam biner dan dapat
+                dibuat untuk berhenti dan berulang kembali ke dalam hitungan awal pada setiap saat. Counter yang
+                mengulang, jumlah kondisi biner yang berbeda menunjukkan modulus (MOD) counter. Sebagai contoh, counter
+                yang mencacah dari 0-1-2-3-4-5-6-7 secara berulang disebut juga modulus 8 atau MOD-8. Rangkaian dasar
+                counter adalah beberapa flip-flop yang jumlahnya bergantung pada modulus yang diperlukan. Secara umum,
+                counter terbagi menjadi 2 jenis, yaitu asynchronous counter (ripple counter) dan synchronous counter.
+            </p>
+            <br>
+            <p>Synchronous counter merupakan counter yang input clock pemicunya dihubungkan pada setiap flip-flop,
+                sehingga setiap flip-flop akan beroperasi dengan masukan transisi clock yang sama. Pada synchronous
+                counter harus dipastikan bahwa setiap flip-flop menahan transisi luarannya sampai tiba gilirannya.
+                Asynchronous counter diagram logika penghitung ripple 2-bit ditunjukkan pada gambar. Toggle (T)
+                flip-flop sedang digunakan. Tetapi kita dapat menggunakan flip-flop JK juga dengan J dan K yang
+                terhubung secara permanen ke logika 1. Clock eksternal diterapkan ke input clock flip-flop A dan output
+                QA diterapkan ke input clock flip-flop berikutnya yaitu FF -B.</p>
+            <br>
+            <p>Logical Diagram <i>Asynchronous counter</i></p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/lan2.jpg" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Truth Table</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/lan3.jpg" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p> ➤ <strong><i>Toggle Flip Flop</i></strong></p>
+            <br>
+            <p>D Flip flop merupakan suatu jenis flip flop yang dibangun dengan menggunakan flip flop RS. D merupakan
+                singkatan dari "data", flip-flop ini menyimpan nilai yang ada pada jalur data. Ini dapat dianggap
+                sebagai sel memori dasar (D Flip-Flops, 2021). </p>
+            <br>
+            <p> Flip-flop D dapat dibuat dari flip-flop set/reset dengan mengikat set ke reset melalui inverter.
+                Hasilnya dapat di-clock. Flip Flop RS memiliki 2 masukan R dan S, tetapi pada D flip-flop terdapat
+                perbedaan yang hanya memiliki hanya 1 masukan yaitu D.</p>
+            <br>
+            <p>D flip-flop bisa diaplikasikan untuk berbagai macam peralatan elektronik dan berbagai bidang. Beberapa
+                bidang tersebut yang memanfaatkan D flip-flop pada aplikasinya adalah pengiriman daya, infrastruktur
+                jaringan, medis, kesehatan, penerangan, sistem otomasi gedung, infrastruktur komunikasi, dan pengukuran.
+                Berikut adalah data sheet dari D Flip-flop:</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/lan4.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Flip Flop D bertindak sebagai komponen memori elektronik karena output konstan ,kecuali ketika sengaja
+                diubah dengan mengubah status input D diikuti oleh sinyal clock yang meningkat dan D Flip Flop adalah
+                register geser blok bangunan. Misalnya, dengan mengalirkan delapan D Flip Flops secara berurutan, satu
+                byte (8-bit) informasi dapat disimpan setelah 8 siklus clock.</p>
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="index.html" class="hero-btn red-btn">HOME</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="course.html" class="hero-btn red-btn">Course</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

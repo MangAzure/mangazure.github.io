@@ -1,0 +1,179 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Timing And Clock Generator</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Timing And Clock Generator</i></h2>
+            <br>
+            <br>
+            <h2><strong>D. <i>Analisa Implementasi Coding</i></strong></h2>
+            <br>
+            <p><strong>1. Hasil Percobaan Pertama</strong></p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win16.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.8 dikarenakan terdapat 2 entity atau file maka perlu digabungkan, maka perlu dideklarasikan
+                2 entity tersebut menjadi 2 komponen untuk melakukan testbench. Berdasarkan Port Input terdapat
+                camera_clk, camcon_status, on_board_clk, dan reset. Sedangkan pada Port Output tedapat clock_out, dan
+                pwm_motor_clk. Lalu pada sinyal input camera_clk bernilai 1 agar tidak terjadi unknown pada sistem,
+                dikarenakan sinyal input membutuhkan inisialisasi data, sedangkan sinyal output tidak perlu inisialisasi
+                data.</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win17.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.9 merupakan deskripsi gambar mengenai beberapa data yang dibutuhkan untuk memulai simulasi.
+                Lalu pada begin, terdapat port map yang berfungsi untuk menghubungkan semua data yang berada di
+                testbench dengan implementation, baik data input maupun output.</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win18.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.10 karena duty cycle bernilai 50% maka periode dibagi dua, dapat diketahui berdasarkan
+                sistem diatas, bahwa setiap setengah periode berubah camera_clk berubah menjadi not camera_clk yang
+                berarti pada kondisi awal nilai dari camera_clk adalah 1, lalu setelah setengah periode maka camera_clk
+                menjadi not camera_clk yang bernilai kebalikan dari 1 yaitu 0, dan siklus cara kerja ini akan berjalan
+                secara terus menerus sampai sistem mati. Siklus cara kerja tersebut juga berlaku pada cara kerja
+                on_board_clk, namun periode pada on_board_clk berbeda dengan periode yang digunakan pada camcon_clk
+                period.</p>
+            <br>
+            <p>Pada bagian begin dilakukan simulasi ketika mencapai 100 ns maka camcon_status dan reset bernilai 1 yang
+                sebelum 100 ns bernilai 0, hal ini menunjukkan bahwa sistem clock divider VGA Display dan Thresholding
+                Buffering dan Light Detection berjalan dengan benar. Lalu setelah 100 ns reset berubah kembali menjadi
+                0, sehingga membuktikan bahwa sistem clock divider dari PWM motor driver mulai berjalan dengan benar.
+                Lalu setelah 400 ns berikutnya camcon_status berubah menjadi 0, yang menandakan bahwa sistem clock
+                divider VGA Display dan Thresholding Buffering dan Light Detection berhenti total, tetapi sistem clock
+                divider dari PWM motor driver masih tetap berjalan karena reset tetap atau tidak ikut berubah yang
+                bernilai 0.</p>
+            <br>
+            <p><strong>2. Hasil Percobaan Kedua</strong></p>
+            <br>
+            <p>➤ Clock Camera Control, VGA Display, Thresholding Buffering and Light Detection</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win19.png" style="width: 90%">
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win20.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.11 dan gambar 3.12 merupakan coding testbench untuk VGA Display percobaan kedua. Perbedaan
+                dari percobaan pertama dengan percobaan kedua adalah penambahan beberapa port seperti data, q dan qbar.
+                Lalu dilakukan penggabungan dengan komponen-komponen yang terdapat pada percobaan pertama, sehingga
+                menghasilkan rangkaian low level. Berdasarkan hasil blok diagram pada Gambar 2.3, port data akan
+                mendapatkan suatu feedback dari qbar, ¬clk akan mendapatkan camera_clk, port reset akan mendapatkan
+                camcon_status, port q akan mencerminkan nilai data atau q, dan port qbar akan berkebalikan dengan dengan
+                q dan pada hal ini qbar akan dihubungkan dengan port clock25Mhz.</p>
+            <br>
+            <p>➤ Clock Penentuan PWM pada Motor</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win21.png" style="width: 90%">
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win22.png" style="width: 90%">
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win23.png" style="width: 90%">
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win24.png" style="width: 50%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.13, gambar 3.14 dan gambar 3.15 merupakan coding testbench pada PWM Motor pada percobaan
+                kedua. Perbedaan pada percobaan pertama dengan percobaan kedua adalah perubahan pada sebuah komponen dan
+                penambahan 2 buah komponen. Perubahan pada sebuah komponen tersebut terjadi pada counter, terdapat 3
+                input pada komponen counter yaitu on_board_clk, reset, dan equal. Sedangkan output tetap sama yaitu
+                cnt_out. Lalu penambahan 2 buah komponen tersebut adalah komponen comparator dan toggle flip flop. Cara
+                kerja komponen comparator adalah membandingkan bit per bit pada input A dan input B. Jika input A dan
+                input B adalah sama, maka output E bernilai 1, dan juga sebaliknya bernilai 0 jika tidak sama. Cara
+                kerja komponen toggle flip flop adalah jika reset terjadi atau bernilai 1 maka q bernilai 1 dan qbar
+                bernilai 0 (dikembalikan pada kondisi semula), dan juga berlaku kebalikannya. Jika rising edge maka data
+                akan bernilai 1, maka nilai q akan bernilai 1 dan qbar bernilai 0 atau selalu kebalikan dari nilai q.
+                Jika data bernilai 0, maka nilai q akan bernilai 0 dan qbar bernilai 1 atau selalu kebalikan dari nilai
+                q. Pada coding tersebut dapat dihubungkan cara kerja tersebut dengan blok diagram pada gambar 2.3.
+                Terdapat beberapa port yang memiliki input dan output yang berhubungan atau menghasilkan satu sama lain
+                sesuai dengan tabel dibawah ini sebagai berikut: </p>
+                <br>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <img src="gambar/win25.jpeg" style="width: 80%">
+                    </div>
+                </div>
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Timing and Clock Generator3.html" class="hero-btn red-btn">Previous Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Timing and Clock Generator5.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

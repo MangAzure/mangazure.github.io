@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Timing And Clock Generator</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Timing And Clock Generator</i></h2>
+            <br>
+            <br>
+            <h2><strong>E. <i>Analisa Dan Hasil Simulasi</i></strong></h2>
+            <br>
+            <p><strong>1. Hasil Percobaan Pertama</strong></p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win26.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.16 diatas merupakan hasil dari penghubungan antara Pixel Capture dengan VGA Display, dan
+                Thresholding Buffering dan Light Detection. Berdasarkan gambar 3.16 dapat diperhatikan bahwa clock_out
+                akan memiliki nilai jika camera_clk dan camcon_status bernilai 1. Pada gambar 3.16 dapat dilihat bahwa
+                setiap 200 ns terdapat banyak 10 gelombang pada camera_clk, maka dapat diketahui bahwa setiap 1
+                gelombang berperiode 20 ns, sehingga diketahui bahwa frekuensi pada camera_clk adalah 50 MHz. Sedangkan
+                pada clock_out terdapat 5 gelombang saja. Berdasarkan banyak gelombang terhadap camera_clk dengan
+                clock_out dapat dibuktikan bahwa setiap 200 ns pada clock_out menghasilkan 5 gelombang, maka dapat
+                dibuktikan bahwa setiap 1 gelombang berperiode 40 ns, maka dapat diketahui bahwa frekuensi pada
+                clock_out adalah 25 MHz. </p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win27.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.17 diatas merupakan hasil dari penentuan PWM pada Motor Driver. Berdasarkan gambar 3.17
+                dapat diperhatikan bahwa pwm_motor_clk akan bernilai jika reset bernilai 0, dan counter sudah mencapai
+                25000 rising edge pada on_board_clk. Berdasarkan gambar 3.17 dapat diketahui bahwa on_board_clk dengan
+                pwm_motor_clk memiliki jarak frekuensi yang sangat jauh berbeda satu sama lain. Pada on_board_clk
+                memiliki frekuensi bernilai 100 MHz, sedangkan pwm_motor_clk hanya memiliki frekuensi bernilai 2 KHz,
+                maka dari itu grafik data pada gambar 3.17 diatas terlihat seperti gelombang yang menyatu.</p>
+            <p><strong>2. Hasil Percobaan Kedua</strong></p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win28.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.18 diatas merupakan hasil dari penghubungan antara Pixel Capture dengan VGA Display, dan
+                Thresholding Buffering dan Light Detection pada percobaan kedua. Berdasarkan gambar 3.18 dapat
+                diperhatikan bila q bernilai 1 dan qbar (clock 25MHz) bernilai 0, maka dapat dinyatakan bahwa setiap 1
+                gelombang berperiode 40 ns. Maka dapat diketahui bahwa frekuensi pada output_port adalah 25 MHz. </p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win29.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.19 diatas merupakan hasil dari penentuan PWM pada Motor Driver. Berdasarkan gambar 3.19
+                dapat diperhatikan bahwa pada saat terjadi rising edge pada on_board_clk dan nilai counter akan
+                bertambah 1 dan menghasilkan cnt_out bernilai 100 dalam decimal, equal akan menghasilkan sinyal bila
+                reset bernilai 0 karena apabila reset bernilai 1 maka cnt_out akan bernilai 1 dan ketika dibandingkan
+                dengan menggunakan comparator, hal ini tidak akan menghasilkan suatu output. Nilai equal akan bernilai 1
+                selama 1 periode karena cnt_out akan kembali ke kondisi semula setelah terjadi nilai equal tersebut.</p>
+            <br>
+            <p>Berdasarkan gambar 3.19 dapat diketahui pula bahwa q dan qbar berubah berdasarkan sinyal dari equal.
+                Dapat diperhatikan bila q bernilai 0 dan qbar bernilai 1, maka dapat dinyatakan bahwa setiap 1 gelombang
+                berperiode 2ms. Maka dapat diketahui bahwa frekuensi pada output_port adalah 500 kHz. Sinyal q dan qbar
+                akan berubah setiap rising edge yang terjadi pada equal. Hal ini dapat terjadi karena pada bagian coding
+                testbench kita telah menghubungkan sinyal clock yang akan digunakan dalam Toggle Flip Flop dengan sinyal
+                equal.</p>
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Timing and Clock Generator4.html" class="hero-btn red-btn">Previous Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Timing and Clock Generator6.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

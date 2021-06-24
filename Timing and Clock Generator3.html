@@ -1,0 +1,216 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Timing And Clock Generator</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>Timing And Clock Generator</i></h2>
+            <br>
+            <br>
+            <h2><strong>C. <i>Analisa Implementasi Coding</i></strong></h2>
+            <br>
+            <p><strong>1. Hasil Percobaan Pertama</strong></p>
+            <br>
+            <p><strong>➤ Clock Camera Control, VGA Display, Thresholding Buffering and Light Detection</strong></p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win9.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.1 hal pertama yang harus diketahui dalam pembuatan sesuatu sistem FPGA (VHDL) adalah
+                menentukan input dan outputnya. Pada gambar 3.1 karena dilakukan penghubungan antara Pixel Capture
+                dengan VGA Display, dan Thresholding Buffering dan Light Detection. Cara kerja VGA Display dan
+                Thresholding Buffering dan Light Detection tidak jauh berbeda, yaitu berhubungan dengan Pixel atau
+                Frame. Maka, Frekuensi yang akan digunakan oleh VGA Display dan Thresholding Buffering dan Light
+                Detection sebesar 25 MHz. Sedangkan frekuensi yang terdapat pada Pixel Capture sebesar 50 MHz, maka
+                untuk memenuhi spesifikasi yang dibutuhkan VGA Display dan Thresholding Buffering dan Light Detection,
+                frekuensi tersebut harus dibagi dua. Pada hal ini dapat diketahui input yang dimiliki adalah clock yang
+                berasal dari Pixel Capture dan Camera Control Status dapat mengindikasikan bahwa camera OV6760 sudah
+                siap untuk menangkap gambar, dan output yang dihasilkan adalah clock untuk VGA Display dan Thresholding
+                Buffering dan Light Detection.</p>
+            <br>
+            <p>Oleh karena itu pada bagian entity VHDL terdapat camera_clk melambangkan clock yang didapatkan dari pixel
+                capture, lalu camcon_status melambangkan camera control status, yang kedua port tersebut merupakan input
+                dari VGA Display dan Thresholding Buffering dan Light Detection. Lalu terdapat clock_out melambangkan
+                hasil clock divider, port ini merupakan output dari VGA Display dan Thresholding Buffering dan Light
+                Detection.</p>
+            <br>
+            <p>Pada bahasa VHDL, output port tidak bisa langsung diperiksa, maka dibutuhkan sebuah sinyal internal yang
+                melambangkan kondisi output pada saat itu. Sinyal internal yang digunakan adalah tmp.</p>
+            <br>
+            <p>Pada bagian begin (line 18), terjadi proses perubahan berdasarkan input yang didapatkan dari camera_clk
+                dan camcon_status. Pada bagian cara kerja clock divider (line 23 hingga 31) sinyal dari camera_clk
+                diproses untuk menghasilkan suatu output yang baru yang dihasilkan dari rising_edge sinyal camera clock
+                yaitu clock out.</p>
+            <br>
+            <p>Pada bagian elsif (line 32 hingga 35) merupakan coding untuk menghindari terjadinya unknown pada awal
+                sistem ini berjalan. Pada sistem digital unknown tidak diperbolehkan terjadi, karena dapat menimbulkan
+                bug pada seluruh sistem.</p>
+            <br>
+            <p><strong>➤ Clock Penentuan PWM pada Motor</strong></p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win10.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.2 hal pertama yang harus diketahui dalam pembuatan sesuatu sistem FPGA (VHDL) adalah
+                menentukan input dan outputnya. Pada gambar 3.2 karena dilakukan penentuan PWM pada motor. Cara kerja
+                dari penentuan PWM pada motor tidak jauh berbeda seperti gambar 3.1, hal yang membedakan adalah port
+                pada input dan output. Port Input pada penentuan PWM pada motor ini adalah on_board_clk yang
+                melambangkan clock yang didapatkan dari board basys 2. Reset yang melambangkan proses mengulang paksa
+                suatu progres dalam sistem menjadi kondisi awal. Lalu pada Port Output pada penetuan PWM pada motor ini
+                adalah pwm_motor_clk yang melambangkan hasil dari output PWM yang dibutuhkan oleh motor driver. Pada
+                Penentuan PWM pada motor hasil input atau output berhubungan dengan rising edge dan Counter, Counter
+                akan bertambah jika rising edge mendapatkan hasil dari clock input. Untuk menentukan frekuensi yang akan
+                digunakan oleh PWM motor, dilihat pada board pada basys 3 diketahui frekeunsinya sebesar 100 MHz,
+                sedangkan PWM motor membutuhkan clock dengan frekuensi 2 KHz. Oleh karena itu dibutuhkan clock divider
+                yang dapat menyesuaikan frekuensi yang dibutuhkan pada sistem ini.</p>
+            <br>
+            <p>Pada hal ini dapat diketahui pembagian frekuensi clock input sebesar 50000 kali, maka dari itu dibutuhkan
+                counter dan comparator. Pada bagian architecture pada bahasa VHDL, output port tidak bisa langsung
+                diperiksa, maka dibutuhkan sebuah sinyal internal yang melambangkan kondisi output pada saat itu. Sinyal
+                internal yang digunakan adalah tmp. Terdapat juga counter yang berfungsi untuk memastikan sinyal clock
+                tidak selalu naik atau bernilai 1.</p>
+            <br>
+            <p>Pada bagian begin (line 18), terjadi proses perubahan berdasarkan input yang didapatkan dari
+                on_board_clk. Pada bagian cara kerja clock divider (line 23 hingga 26) sinyal dari reset diproses untuk
+                mengembalikan counter kembali ke kondisi awal secara paksa, dan menghasilkan clock PWM output yang
+                bernilai 0.</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win11.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.3 merupakan sistem jika input reset tidak mengindikasikan counter untuk kembali ke kondisi
+                awal, maka counter akan terus bertambah sampai ke kondisi akhir yang bernilai 25000 atau nilai maksimum.
+                Nilai pada clock PWM Output akan berubah menjadi 1 atau sebaliknya, dan jika tmp, pwm_motor_clk bernilai
+                0 maka counter bernilai 1 yang menjelaskan bahwa sebelumnya counter berhasil mencapai nilai maksimum,
+                lalu terjadi pengulangan secara otomatis.</p>
+            <br>
+            <p><strong>2. Hasil Percobaan kedua</strong></p>
+            <br>
+            <p>Pada percobaan pertama, seluruh cara kerja yang digunakan bersifat high level karena tidak terdapat
+                komponen elektronik digital yang digunakan. Oleh karena itu, seluruh cara kerja akan digunakan dalam
+                komponen elektronik digital sehingga terdapat beberapa komponen yang akan digunakan, seperti counter,
+                comparator, dan toggle flip flop. Pada bagian Clock Camera Control, VGA Display, Thresholding Buffering
+                and Light Detection, akan digunakan Toggle Flip Flop yang akan digunakan untuk menyimpan 1 bit,
+                sedangkan pada bagian Clock Penentuan PWM pada Motor, akan digunakan counter, comparator, dan toggle
+                flip flop untuk membagi suatu frekuensi input untuk jadi frekuensi yang lebih rendah.</p>
+            <br>
+            <p><strong>➤ Clock Camera Control, VGA Display, Thresholding Buffering and Light Detection</strong></p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win12.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.4 terdapat coding camera control, VGA display, thresholding buffering dan light detection
+                pada percobaan kedua, yang membedakan dari hasil coding pada percobaan pertama dengan percobaan kedua
+                adalah penambahan port-port. Pada hal ini digunakan sebuah toggle flip flop yang akan menyimpan 1 bit
+                dan akan mengeluarkan 1 bit biner.</p>
+            <br>
+            <p>Pada hal ini terlihat apabila terdapat sinyal reset, maka toggle flip flop akan kembali menjadi kondisi
+                semula. Apabila tidak terdapat sinyal reset, maka akan dilakukan pengecekan pada equal ketika terjadi
+                rising_edge dari clock input. Output yang akan diberikan sebagai input untuk PWM motor clock adalah
+                kebalikan dari data dan data port tersebut akan mendapatkan input berupa feedback dari qbar.</p>
+            <p><strong>➤ Pembuatan Clock untuk PWM pada Motor</strong></p>
+            <br>
+            <p>a. Counter</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win13.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.5 merupakan coding counter untuk PWM Motor, Pada bagian counter ini cara kerja yang perlu
+                diketahui adalah ketika rising edge, akan dilakukan pengecekan apakah equal atau tidak, jika terjadi
+                equal maka reset akan terjadi, jika equal tidak terjadi maka reset juga tidak akan terjadi dan counter
+                akan mengeluarkan output berupa nilai output sebelumnya ditambah 1. </p>
+            <br>
+            <p>b. Comparator</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win14.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.6 merupakan coding comparator untuk PWM Motor, Pada bagian comparator ini cara kerjanya
+                adalah pembandingan bit per bit pada input A dan input B. Jika input A dan input B adalah sama, maka
+                output E bernilai 1, dan juga sebaliknya bernilai 0 jika tidak sama. </p>
+            <br>
+            <p>c. Toggle Flip Flop</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/win15.png" style="width: 90%">
+                </div>
+            </div>
+            <br>
+            <p>Pada gambar 3.7 merupakan coding toggle flip flop untuk PWM Motor, Pada bagian toggle flip flop ini cara
+                kerjanya adalah jika reset terjadi atau bernilai 1 maka q bernilai 1 dan qbar bernilai 0 (dikembalikan
+                pada kondisi semula). Jika rising edge, maka nilai q akan mencerminkan nilai data port sedangkan nilai
+                qbar akan selalu kebalikan dari nilai q. Jika data bernilai 0, maka nilai q akan bernilai 0 dan qbar
+                bernilai 1 atau selalu kebalikan dari nilai q.</p>
+            <br>
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Timing and Clock Generator2.html" class="hero-btn red-btn">Previous Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Timing and Clock Generator4.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>
