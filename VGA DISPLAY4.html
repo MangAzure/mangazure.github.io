@@ -1,0 +1,171 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Motor Speed, Measurement, and Driver Motor</i></h1>
+    </section>
+
+    <!-- VGA -->
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>VGA Display</i></h2>
+
+            <p> ➤ <strong><i>Block Diagram</i></strong></p>
+
+            <br>
+            <p>Simple Block Diagram</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yohannes5.png" style="width: 100%">
+                </div>
+            </div>
+            <br>
+            <p>Block Diagram with Ports</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yohannes6.png" style="width: 180%">
+                </div>
+            </div>
+            <h2>Block diagram explanation </h2>
+            <br>
+            <p>This Block diagram has three main parts : </p>
+            <br>
+            <p>- Programmable logic device </p>
+            <p>- Video DAC ( data generator ) </p>
+            <p>- VGA display </p>
+            <br>
+            <p>Where the programmable logic device has three modules </p>
+            <br>
+            <p>- VGA controller</p>
+            <p>- Frame buffer / image source </p>
+            <p>- Pixel clock enable generator </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p>The input for this block diagram is the system clock ( input is given from the timing/ clock generator
+                part ) which later will be converted into pixel clock and the other input is the RAM ( data input is
+                given from camera control and pixel capture ) where the data is already located in the VGA controller.
+            </p>
+            <br>
+            <br>
+            <h2> 1. <strong>Programmable Logic Device</strong></h2>
+            <br>
+            <p> ➤ <strong>VGA Controller</strong></p>
+            <br>
+            <p>The VGA controller is a programmable logic component that accomplishes the signal timing necessary to
+                interface with the VGS monitor. The input required is the pixel clock and the image source, where areas
+                VGA controller provide the horizontal and vertical syn signals as well as the pixel coordinated and
+                display enable needed to produce the image at the right time.</p>
+            <p>It provides necessary timing signals to drive monitor through VGA port, VGA controllers internally
+                generates the timing signal based on the pixel frequency ( pixel frequency could be calculated based on
+                the refresh rate of the monitor and the number of pixel ( resolution ). VGA controller also control the
+                flow of data through the VGA port.</p>
+            <br>
+            <p><strong>VGA Connector pin and pinout</strong></p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yohannes7.png" style="width: 100%">
+                </div>
+            </div>
+            <br>
+            <p> ➤ <strong>Pixel Clock Enable Generator</strong></p>
+            <br>
+            <p>The pixel clock was given the system clock as an input and it generates it into pixel clock where later
+                on will be forwarded to the VGA controller and will be generated into pixel frequency. </p>
+            <br>
+            <p> ➤ <strong>Frame buffer / Image source </strong></p>
+            <br>
+            <p>This module receives the RAM from the VGA controller which pass through the EDID interface in the VGA
+                port. Frame buffer is the memory that stores the image to be displayed ( the memory of the image here is
+                RAM ) . The frame buffer passes this digital info into the Video DAC/ data generator based on command of
+                the VGA controller. </p>
+            <br>
+            <h2> 2. <strong>Data Generator/ Video DAC </strong></h2>
+            <br>
+            <p>As the DAC is given digital RGB data from the image source/ frame buffer, DAC converts the RGB digital
+                data and drives the VGA display with RGB analog signals at an appropriate voltage level. </p>
+            <br>
+            <h2> 3. <strong>VGA Display</strong></h2>
+            <br>
+            <p>Display the image resulted by the process done by the whole system. </p>
+
+            <p> ➤ <strong><i>Anggota Divisi VGA Display</i></strong></p>
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yoanggota1.jpg" style="width: 20%">
+                    <p>Yohannes Nathanael - 2301938806 (Ketua)</p>
+                </div>
+                <div class="vga-1-col">
+                    <img src="images/yoanggota2.jpg" style="width: 20%">
+                    <p>Tobijah Aji Wiyata - 2301955352</p>
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yoanggota3.jpg" style="width: 20%">
+                    <p>Ramaditya Saputro - 2301954904</p>
+                </div>
+                <div class="vga-1-col">
+                    <img src="images/yoanggota4.jpg" style="width: 20%">
+                    <p>Fadli Muhammad - 2301954305</p>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="VGA DISPLAY3.html" class="hero-btn red-btn">Previous
+                        Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="course.html" class="hero-btn red-btn">Back to Choose a Course</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi PIXEL CAPTURE DAN CAMERA CONTROL</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>PIXEL CAPTURE DAN CAMERA CONTROL</i></h2>
+            <br>
+            <br>
+            <h2> 1. <strong><i>Capturing Image Data</i></strong></h2>
+
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yere1.png" style="width: 100%">
+                </div>
+            </div>
+            <br>
+            <p>Tabel diatas merupakan spesifikasi OV7670. Berikut ini merupakan blok diagram Camera control dan Pixel
+                capture :</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yere2.png" style="width: 100%">
+                </div>
+            </div>
+            <br>
+            <p>Berikut ini merupakan Timing Diagram Pixel Capture :</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yere3.png" style="width: 100%">
+                </div>
+            </div>
+            <br>
+            <p>Dikarenakan keterbatasan waktu kelompok kami tidak dapat mensimulasikan projek Pixel Capture pada kamera
+                OV7670 secara langsung. Oleh karena itu, kami hanya mengambil gambar dan mengkonversi dalam bentuk file
+                gambar binary. Tetapi pada bagian ini kami akan menjelaskan bagaimana pengambilan gambar dengan format
+                kamera RGB565 dengan menggunakan rangkaian digital sederhana. Berikut ini adalah blok diagram progress
+                pencapaian kelompok kami :</p>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yere4.png" style="width: 100%">
+                </div>
+            </div>
+            <br>
+            <p>Ketika data diambil melalui first byte dan last byte, Data akan tersimpan pada D-latch pertama dan kedua.
+                D-latch yang dipakai sebesar 8 bit. Setelah tersimpan di D-latch, data akan dikirim ke multiplexer 2
+                bit. Setelah melalui multiplexer, data akan dikirim ke D-latch output sebesar 16 bit. Kami hanya membuat
+                sampai D-latch 16 bit karena keterbatasan waktu, dimana seharusnya dari multiplexer akan dipecah ke 3
+                D-latch 4 bit sehingga format RGB565 diubah ke RGB444 agar dapat disimpan pada buffer.</p>
+
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="index.html" class="hero-btn red-btn">HOME</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="PIXEL CAPTURE DAN CAMERA CONTROL2.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

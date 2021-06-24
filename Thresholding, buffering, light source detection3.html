@@ -1,0 +1,251 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Thresholding, buffering, light source detection</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>VGA Thresholding, buffering, light source detection</i></h2>
+            <br>
+
+            <p> ➤ <strong><i>Coding 1.1</i></strong></p>
+            <br>
+            <h2><strong>Version 1.1</strong></h2>
+            <br>
+            <h2><strong>VHDL</strong></h2>
+            <br>
+            <textarea name="w3review" id="w3review" cols="150" rows="10">
+                [START]
+library ieee;
+use ieee.std_logic_1164.ALL;
+use ieee.numeric_std.ALL;
+use std.textio.all;
+
+-- Variable Initialize
+entity read_image_VHDL is
+	generic (
+		ADDR_WIDTH     	: integer	:= 4;        
+		DATA_WIDTH     	: integer 	:= 8;
+		IMAGE_SIZE  		: integer 	:= 15;
+		IMAGE_FILE_NAME 	: string 	:="IMAGE_FILE.MIF"
+	);	
+
+	port(
+		-- INPUT
+		clock					: IN STD_LOGIC;
+		re						: IN STD_LOGIC;
+		tmp 					: IN STD_LOGIC_VECTOR  ( (DATA_WIDTH - 1) downto 0);
+		tmp_location		: IN STD_LOGIC_VECTOR  ( (ADDR_WIDTH - 1) DOWNTO 0);
+		
+		-- OUTPUT
+		location				: OUT std_logic_vector ( (ADDR_WIDTH - 1) DOWNTO 0);
+		value					: OUT std_logic_vector ( (DATA_WIDTH - 1) DOWNTO 0));
+end read_image_VHDL;
+
+architecture behavioral of read_image_VHDL is
+
+
+signal max : std_logic_vector( (DATA_WIDTH - 1) downto 0) := (others=>'0');
+
+
+begin
+  process (clock)
+  begin
+   if (rising_edge(clock)) then
+      if (re = '1') then
+        -- Compare tmp with max 
+		  if tmp > max then
+				-- Saving the tmp and value
+				value <= tmp;
+				
+				-- Renew the value of max
+				max <= tmp;
+				
+				-- Saving the location of max value
+				location <= tmp_location;
+		  end if;
+		  
+      end if;
+    end if;
+  end process;
+
+end behavioral;
+[END]
+----------------
+
+
+            </textarea>
+            <br>
+            <h2><strong>Testbench</strong></h2>
+            <br>
+            <textarea name="w3review" id="w3review" cols="150" rows="10">
+                [START]
+                LIBRARY ieee;
+                USE ieee.std_logic_1164.ALL;
+                use ieee.numeric_std.all;
+                use std.textio.all;
+                
+                -- Design Steps:
+                --		1. Read from the file
+                -- 	2. Compare the value to max and saving the value and location one by one
+                --		3. Plot the signal
+                ENTITY tb_read_image_vhdl IS
+                END tb_read_image_vhdl;
+                ARCHITECTURE behavior OF tb_read_image_vhdl IS 
+                
+                    COMPONENT read_image_VHDL
+                    PORT(
+                            -- Input Port
+                         clock 					: IN  std_logic;
+                         re 						: IN  std_logic;
+                            tmp						: IN  std_logic_vector (7 downto 0);
+                            tmp_location			: IN 	std_logic_vector (3 downto 0);
+                            
+                            -- Output Port
+                            location					: OUT std_logic_vector (3 DOWNTO 0);
+                            value 					: OUT std_logic_vector (7 DOWNTO 0)
+                        );
+                    END COMPONENT;
+                     
+                   --Inputs
+                   signal clock 					: std_logic 							:= '0';
+                   signal re 						: std_logic 							:= '0';
+                
+                  --Outputs
+                    signal location				: std_logic_vector(3 downto 0);
+                    signal value 					: std_logic_vector (7 downto 0);
+                    
+                    --Tmp variable
+                    signal tmp						: std_logic_vector(7 downto 0) 	:= (others => '0');
+                    signal tmp_location			: std_logic_vector(3 downto 0) 	:= (others => '0');
+                    
+                   -- Clock period definitions
+                    constant clock_frequency 	: integer 	:= 25e6;
+                   constant clock_period 		: time 		:= 1000ms / clock_frequency;
+                
+                BEGIN
+                
+                    -- Read image in VHDL
+                   uut: read_image_VHDL PORT MAP (
+                          clock 			=> clock,
+                          re 				=> re,
+                             tmp				=> tmp,
+                             tmp_location	=> tmp_location,
+                             location 		=> location,
+                             value 			=> value
+                        );
+                
+                   -- Generate clock 25 MHz
+                   clock_process :process
+                   begin
+                    clock <= '0';
+                        wait for clock_period/2;
+                    clock <= '1';
+                        wait for clock_period/2;
+                   end process;
+                    
+                   -- Real Magic Happens
+                   stim_proc: process
+                    file 		file_name 			: text open read_mode is "IMAGE_FILE.MIF";
+                    variable file_line 			: line;
+                    variable temp_line 			: bit_vector(7 downto 0);
+                   begin  
+                        re <= '0';
+                
+                        wait for 100 ns;
+                        re <= '1';  
+                        
+                        -- Read from the file by looping every line
+                        for i in 0 to 15 loop
+                            -- Reading every line
+                            readline(file_name, file_line);
+                            
+                            -- Reading every character in every line
+                            read(file_line, temp_line);
+                            
+                            -- Saving its value and location
+                            tmp <= to_stdlogicvector(temp_line);
+                            tmp_location <= std_logic_vector(to_unsigned(i, 4));
+                            
+                            wait for 40 ns;
+                        end loop;
+                        
+                        wait;
+                   end process;
+                
+                END;
+                
+                [END]
+                
+            </textarea>
+            <br>
+            <br>
+            <p>Koding version 1.1 ini sudah mulai difungsikan untuk bisa membandingkan input dan memilih input yang
+                lebih besar. Koding ini memiliki 4 input (clock, re, tmp, dan tmp_location), 2 output (location, dan
+                value), dan 1 signal (max). Pertama, saat rising edge sistem akan memasukkan data dari IMAGE_FILE ke
+                tmp. Kemudian sistem akan membandingkan data dari tmp dengan nilai max satu per satu. Jika tmp lebih
+                besar dari max, nilai tmp akan dimasukkan ke max dan value, lalu lokasinya akan disimpan di location.
+            </p>
+            <br>
+            <h2><strong>Hasil</strong></h2>
+            <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/rey4.jpg" style="width: 100%">
+                </div>
+            </div>
+
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Thresholding, buffering, light source detection2.html" class="hero-btn red-btn">Previous
+                        Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Thresholding, buffering, light source detection4.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

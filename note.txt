@@ -1,0 +1,1 @@
+- Motor Speed, Measurement, and Driver Motor(1,2,3,5,6, kesimpulan, motorable 1 & 2)

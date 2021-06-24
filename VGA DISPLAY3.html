@@ -1,0 +1,277 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi VGA Display</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>VGA Display</i></h2>
+            <br>
+
+            <p> ➤ <strong><i>Third Code</i></strong></p>
+            <br>
+            <h2>BEHAVIORAL</h2>
+
+            <textarea id="w3review" name="w3review" rows="10" cols="150%">
+                library IEEE;
+                use IEEE.STD_LOGIC_1164.ALL;
+                use IEEE.STD_LOGIC_UNSIGNED.ALL;
+                
+                entity vga_stripes is 
+                        Port ( clk, clr: in std_logic;
+                                 hsync : out std_logic;
+                                 vsync : out std_logic;
+                                 red : out std_logic;
+                                 green : out std_logic;
+                                 blue : out std_logic );
+                end vga_stripes;
+                
+                architecture vga_stripes of vga_stripes is 
+                
+                constant hpixels: std_logic_vector(9 downto 0) := "1100100000";
+                constant vlines: std_logic_vector(9 downto 0) := "1000001001";
+                constant hbp: std_logic_vector(9 downto 0) := "0010010000";
+                constant hfp: std_logic_vector(9 downto 0) := "1100010000";
+                constant vbp: std_logic_vector(9 downto 0) := "0000011111";
+                constant vfp: std_logic_vector(9 downto 0) := "0111111111";
+                signal hc, vc: std_logic_vector(9 downto 0);
+                signal vidon : std_logic;
+                signal vsenable: std_logic;
+                    
+                
+                </textarea>
+            <br>
+            <p>in this input above , entity defines a 25 MHz clock, clk, and a clear signal, clr. The controller outputs
+                hsync, vsync, red, green, and blue. To make it easier to be understand and written, we define the
+                constant for the horizontal and vertical regions including the horizontal and vertical sync pulses, back
+                porches, video regions, and front porches. We will create a horizontal counter that counts pixels and a
+                vertical counter to count lines. The constants will define the regions according to these counter values
+            </p>
+            <br>
+            <textarea id="w3review" name="w3review" rows="10" cols="150%">
+                begin 
+
+                process(clk, clr) 
+                begin 
+                
+                if clr = '1' then 
+                         hc <= "0000000000";
+                         elsif(clk'event and clk = '1') then
+                         if hc = hpixels-1 then               
+                         --The counter has reached the end of pixel count     
+                                hc <= "0000000000";
+                                vsenable <= '1';                             
+                                --Enable the vertical counter to increment
+                          else     	
+                                    hc <= hc + 1;          
+                                    --Increment the horizontal counter  
+                                    vsenable <= '0';          
+                                    --Leave the vsenable off 
+                                    end if;
+                                    
+                        end if;
+                end process;   
+                
+                hsync <= '0' when hc < 128 else '1';         
+                --Horizontal Sync Pulse is low when hc is 0 - 127
+        
+                </textarea>
+            <br>
+            <p>The code above shows process of the horizontal sync counter, where this counter need to count up to 800
+                decimal hence it must be 10 bits wide. When the counter , equals hpixels reached 800 it must start over.
+                Also simultaneously , signaling the vertical line counter to count a line by bringing vsenable high for
+                one clock cycle. As the hsync signal is low during sync pulse and back porch, that is, when hc is less
+                than 128. Otherwise, hsync is high. In this code, we are only setting the hsync signal.</p>
+
+            <br>
+            <textarea name="w3review" id="w3review" cols="150%" rows="10">
+                --Counter for the vertical sync signal 
+                process(clk, clr)
+                begin if clr = '1' then  
+                        vc <= "0000000000";
+                elsif(clk'event and clk = '1' and vsenable='1') then
+                --Increment when enabled 
+                if vc = vlines-1 then   
+                --Reset when the number of lines is reached
+                        vc <= "0000000000";
+                else           
+                        vc <= vc + 1;     --Increment vertical counter 
+                end if; 
+            end if; 
+        end process;  
+           vsync <= '0' when vc < 2 else '1';    
+            --Vertical Sync Pulse is low when vc is 0 or 1
+        
+
+                </textarea>
+            <br>
+            <p>The code above shows the process for the vertical sync counter. Every time the vsenable signal goes high,
+                the vertical counter increments to count a line. When the counter has reached vlines, it must reset to
+                start counting lines for a new frame. Finally, vsync is set as low if vc is less than 2 for the vertical
+                sync pulse and high otherwise.</p>
+            <br>
+            <textarea name="w3review" id="w3review" cols="150%" rows="10">
+                vidon <= '1' when (((hc < hfp) and (hc > hbp))
+                and ((vc < vfp) and (vc > vbp))) else '0';   
+                --Enable video out when within the porches 
+                process(vidon, hc)
+                begin        
+                red <= '0'; 
+                green <= '0'; 
+                blue <= '0';
+                 if vidon = '1' then  
+                red <= vc(3);
+                green <= not vc(3);
+                end if;
+                end process; 
+
+
+                end vga_stripes;
+
+            </textarea>
+            <p>as we have implemented a counter for the horizontal and vertical sync and have defined hsync and vsync ,
+                we need to differentiate between regions with visible video from the proches. In the code above, we set
+                the vidon signal to high when the horizontal counter is between the horizontal back porch and front
+                porch and the vertical counter is between the vertical back porch and front porch. Otherwise, vidon is
+                low where there is no visible video. At last , the process driving the red green and blue signal is
+                given, where all signals are defaulted to low. In the visible video regions, when vidon is high, red is
+                high when vc(3) is high and green is the opposite. This way, every eight lines the colors will alternate
+                between red and green showing a band of red eight lines high and a band of green eight lines high.</p>
+                <br>
+                <br>
+                <br>
+                <h2>TESTBENCH</h2>
+                <textarea name="w3review" id="w3review" cols="150%" rows="10">
+library IEEE;
+use IEEE.Std_logic_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity vga_stripes_tb is
+end;
+
+architecture bench of vga_stripes_tb is
+
+  component vga_stripes 
+  		Port ( clk, clr: in std_logic;
+  				 hsync : out std_logic;
+  				 vsync : out std_logic;
+  				 red : out std_logic;
+  				 green : out std_logic;
+  				 blue : out std_logic );
+  end component;
+
+  signal clk, clr: std_logic;
+  signal hsync: std_logic;
+  signal vsync: std_logic;
+  signal red: std_logic;
+  signal green: std_logic;
+  signal blue: std_logic ;
+
+  constant clock_period: time := 10 ns;
+  signal stop_the_clock: boolean;
+  signal hc, vc: std_logic_vector(9 downto 0);
+	signal vidon : std_logic;
+signal vsenable: std_logic;
+
+begin
+
+  uut: vga_stripes port map ( clk   => clk,
+                              clr   => clr,
+                              hsync => hsync,
+                              vsync => vsync,
+                              red   => red,
+                              green => green,
+                              blue  => blue );
+
+  stimulus: process
+  begin
+  
+    -- Put initialisation code here
+
+    clr <= '1';
+    wait for 5 ns;
+    clr <= '0';
+    wait for 5 ns;
+
+    -- Put test bench stimulus code here
+	 
+	 vidon <= '1' ;
+	 vsenable <= '1' ;
+
+    --stop_the_clock <= true;
+    wait;
+  end process;
+
+  clocking: process
+  begin
+    while not stop_the_clock loop
+      clk <= '0', '1' after clock_period / 2;
+      wait for clock_period;
+    end loop;
+    wait;
+  end process;
+
+end;
+
+                </textarea>
+                <br>
+                <p>Simulation</p>
+                <br>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yohannes4.png" style="width: 180%">
+                </div>
+            </div>
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="VGA DISPLAY2.html" class="hero-btn red-btn">Previous Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="VGA DISPLAY4.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

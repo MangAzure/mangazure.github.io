@@ -1,0 +1,269 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi PIXEL CAPTURE DAN CAMERA CONTROL</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i>PIXEL CAPTURE DAN CAMERA CONTROL</i></h2>
+            <br>
+            <br>
+            <h2> 2. <strong><i>Reading Image File from VHDL</i></strong></h2>
+            <br>
+            <br>
+            <p>Dikarenakan keterbatasan waktu kelompok kami tidak dapat mensimulasikan projek Pixel Capture pada kamera
+                OV7670 secara langsung, oleh karena itu kami hanya mensimulasikan bagaimana cara algoritma dapat membaca
+                file gambar dengan image size yang sesuai pada kamera OV7670 (640*480). Projek ini berisi tentang cara
+                membaca gambar melalui algoritma. Algoritma gambar yang ada kemudian disimulasikan kedalam bentuk VHDL.
+                Berikut ini adalah penjelasan cara VHDL dapat membaca suatu gambar dan menerjemahkan kedalam suatu blok
+                memori dari FPGA selama simulasi.</p>
+            <br>
+            <p>Dikarenakan VHDL tidak dapat membaca file-file gambar biasa seperti BMP, JPG, dan lain-lain secara
+                langsung, maka setiap gambar yang ada harus dikonversi dalam bentuk text binary sehingga VHDL dapat
+                membaca gambar tersebut dengan menggunakan library TEXTIO VHDL package. Ada beberapa software seperti
+                Matlab atau C yang dapat digunakan untuk mengkonversi gambar menjadi text file binary, dan jika file
+                gambar binary sudah siap, kita dapat pindahkan kedalam VHDL kita melalui fungsi berikut :</p>
+
+            <textarea name="w3review" id="w3review" cols="150%" rows="10">
+    impure function init_mem(mif_file_name : in string) return mem_type is
+    file mif_file : text open read_mode is mif_file_name;
+    variable mif_line : line;
+    variable temp_bv : bit_vector(DATA_WIDTH-1 downto 0);
+    variable temp_mem : mem_type;
+begin
+    for i in mem_type'range loop
+        readline(mif_file, mif_line);
+        read(mif_line, temp_bv);
+        temp_mem(i) := to_stdlogicvector(temp_bv);
+    end loop;
+    return temp_mem;
+end function;                 
+
+                </textarea>
+            <br>
+            <p>Setelah menggunakan function diatas. Kemudian kita harus memasukkan data gambar di file text binary
+                kedalam blok memori dengan cara menambahkan satu baris di kode VHDL seperti berikut.</p>
+            <textarea name="w3review" id="w3review" cols="150%" rows="10">
+                    signal ram_block: mem_type := init_mem(IMAGE_FILE_NAME);
+                </textarea>
+            <br>
+            <p>Kemudian kita mengkonversi dari gray image menjadi sebagai berikut. Berikut ini link download file gambar
+                binary:</p>
+            <br>
+            <a href="https://drive.google.com/file/d/1X_7OKjyh2Wl-jZaVENu15bUFFFGFJofg/view?usp=sharing">Klik Disini</a>
+            <br>
+            <p>Berikut ini merupakan simulation coding:</p>
+            <textarea name="w3review" id="w3review" cols="150%" rows="10">
+library ieee;
+use ieee.std_logic_1164.ALL;
+use ieee.numeric_std.ALL;
+use std.textio.all;
+entity read_image_VHDL is
+  generic (
+    ADDR_WIDTH     : integer := 8;        
+    DATA_WIDTH     : integer := 8;
+    IMAGE_SIZE  : integer := 307200;
+    IMAGE_FILE_NAME : string :="IMAGE_FILE.MIF"
+  );
+  port(
+    clock: IN STD_LOGIC;
+    data: IN std_logic_vector ((DATA_WIDTH-1) DOWNTO 0);
+    rdaddress: IN STD_logic_vector((ADDR_WIDTH-1) downto 0);
+    wraddress: IN STD_logic_vector((ADDR_WIDTH-1) downto 0);
+    we: IN STD_LOGIC;
+    re: IN STD_LOGIC;
+    q: OUT std_logic_vector ((DATA_WIDTH-1) DOWNTO 0);
+ status_configuration: OUT std_logic);
+end read_image_VHDL;
+ 
+architecture behavioral of read_image_VHDL is
+ 
+TYPE mem_type IS ARRAY(0 TO IMAGE_SIZE) OF std_logic_vector((DATA_WIDTH-1) DOWNTO 0);
+ 
+impure function init_mem(mif_file_name : in string) return mem_type is
+    file mif_file : text open read_mode is mif_file_name;
+    variable mif_line : line;
+    variable temp_bv : bit_vector(DATA_WIDTH-1 downto 0);
+    variable temp_mem : mem_type;
+begin
+    for i in mem_type'range loop
+        readline(mif_file, mif_line);
+        read(mif_line, temp_bv);
+        temp_mem(i) := to_stdlogicvector(temp_bv);
+    end loop;
+    return temp_mem;
+end function;
+ 
+signal ram_block: mem_type := init_mem(IMAGE_FILE_NAME);
+signal read_address_reg: std_logic_vector((ADDR_WIDTH-1) downto 0) := (others=>'0');
+  
+begin
+  process (clock)
+  begin
+   if (rising_edge(clock)) then
+      if (we = '1') then
+        ram_block(to_integer(unsigned(wraddress))) <= data;
+      end if;
+      if (re = '1') then
+        q <= ram_block(to_integer(unsigned(rdaddress)));
+      end if;
+    end if;
+ 
+ -- status_configuration for clock generator to start making pulse
+status_configuration <= '0';
+  end process;
+ 
+end behavioral;
+
+                </textarea>
+            <br>
+            <p>File binary gambar tersebut kemudian disimpan dalam bentuk “.MIF”. Berikut adalah kode VHDL untuk membaca
+                file binary gambar dan menerjemahkan kedalam bentuk blok memori serta testbench dari coding tersebut.
+            </p>
+            <br>
+            <textarea name="w3review" id="w3review" cols="150%" rows="10">
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use ieee.numeric_std.all;
+ 
+ENTITY tb_read_image_vhdl IS
+END tb_read_image_vhdl;
+ARCHITECTURE behavior OF tb_read_image_vhdl IS 
+    COMPONENT read_image_VHDL
+    PORT(
+         clock : IN  std_logic;
+         data : IN  std_logic_vector(7 downto 0);
+         rdaddress : IN  std_logic_vector(7 downto 0);
+         wraddress : IN  std_logic_vector(7 downto 0);
+         we : IN  std_logic;
+         re : IN  std_logic;
+         q : OUT  std_logic_vector(7 downto 0);
+status_configuration : OUT std_logic
+        );
+    END COMPONENT;
+   --Inputs
+   signal clock : std_logic := '0';
+   signal data : std_logic_vector(7 downto 0) := (others => '0');
+   signal rdaddress : std_logic_vector(7 downto 0) := (others => '0');
+   signal wraddress : std_logic_vector(7 downto 0) := (others => '0');
+   signal we : std_logic := '0';
+   signal re : std_logic := '0';
+  --Outputs
+   signal q : std_logic_vector(7 downto 0);
+signal status_configuration : std_logic;
+
+   -- Clock period definitions
+   constant clock_period : time := 10 ns;
+   signal i: integer;
+BEGIN
+-- Read image in VHDL
+   uut: read_image_VHDL PORT MAP (
+          clock => clock,
+          data => data,
+          rdaddress => rdaddress,
+          wraddress => wraddress,
+          we => we,
+          re => re,
+          q => q,
+ status_configuration => status_configuration
+        );
+ 
+   -- Clock process definitions
+   clock_process :process
+   begin
+  clock <= '0';
+  wait for clock_period/2;
+  clock <= '1';
+  wait for clock_period/2;
+   end process;
+   -- Stimulus process
+   stim_proc: process
+   begin  
+                data <= x"00";
+  rdaddress <= x"00";
+  wraddress <= x"00";
+  we <= '0';
+  re <= '0';
+                wait for 100 ns;
+  re <= '1';  
+  for i in 0 to 307200 loop
+  rdaddress <= std_logic_vector(to_unsigned(i, 8));
+  wait for 20 ns;
+  end loop;
+      wait;
+   end process;
+ 
+END;
+
+            </textarea>
+            <br>
+            <p>Kemudian, ketika simulasi pada testbench gunakan function ini pada console sebagai berikut “isim set
+                maxtraceablesize 2457608”. berikut adalah timing diagram dari gambar tersebut melalui blok memori serta
+                simulasi dari file text binary dari output port RAM block.</p>
+                <br>
+
+
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yere5.png" style="width: 100%">
+                </div>
+            </div>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="images/yere6.png" style="width: 100%">
+                </div>
+            </div>
+            
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="PIXEL CAPTURE DAN CAMERA CONTROL1.html" class="hero-btn red-btn">Previous Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="PIXEL CAPTURE DAN CAMERA CONTROL3.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>
