@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Motor Direction and Speed Decision and Control</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i> Motor Direction and Speed Decision and Control</i></h2>
+            <br>
+
+            <p> ➤ <strong><i>Hasil dan Analisa</i></strong></p>
+            <br>
+            <p><strong>Percobaan Kedua</strong></p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/mic9.png" style="width: 100%">
+                    <p>Disini kita lihat ada library dan entity. Entity yang dipakai disini adalah clk, row, column,
+                        duty_kiri, duty_kanan dimana clk dipakai untuk menerima clock Row dan column dipakai untuk
+                        mencari lokasi cahaya, duty_kiri dan duty_kanan merupakan output untuk mendeskripsikan kecepatan
+                        untuk roda kiri dan roda kanan.</p>
+                    <img src="gambar/mic10.png" style="width: 100%">
+                    <p>Disini adalah architecture dari rangkaian ini dimana proses akan sensitive terhadap kolom. Di
+                        architecture ini terdapat variabel width, beda_x, left, right. Width merupakan lebar layer,
+                        beda_x adalah beda antara lokasi cahaya dengan tengah layer. Variabel left dan right dipakai
+                        untuk membuat truth table ke kiri dan ke kanan..</p>
+                    <img src="gambar/mic11.png" style="width: 100%">
+                    <p>Disini merupakan potongan kode untuk menentukan arahnya. Bila kolom sama dengan tengah layer,
+                        maka left dan right dibuat satu menandakan maju. Bila ternyata column lebih besar daripada
+                        tengah layer, left dibuat menjadi 0 dan right menjadi 1. Begitu juga dengan sebaliknya. Bila
+                        column lebih kecil daripada tengah layer, left dibuat menjadi 1 dan right dibuat menjadi 0. Bila
+                        semua ini salah, maka akan dianggap sebagai error dan left dan right dibuat menjadi 0.</p>
+                    <img src="gambar/mic12.png" style="width: 100%">
+                    <p>Potongan kode ini digunakan untuk menentukan kecepatan duty cycle roda kiri dan roda kanan. Bila
+                        arahnya ke kanan, maka bila beda_x lebih kecil dari 32, duty cycle kiri akan lebih besar sedikit
+                        daripada duty cycle kanan. Makin besar beda_x, makin besar juga perbedaan duty cycle kiri dengan
+                        kanan. Konsep ini sama dengan bila arahnya mau ke kiri, tinggal dibalik saja.</p>
+                    <img src="gambar/mic13.png" style="width: 100%">
+                    <img src="gambar/mic14.png" style="width: 100%">
+                    <p>Inilah hasil dari rangkaian ini. Tetapi program ini mengasumsikan bahwa cahaya yang akan diterima
+                        merupakan row dan column. Sedangkan pada kenyataannya nilai yang diterima untuk posisi cahaya
+                        adalah seperti yang ada pada percobaan pertama dan desain seperti ini termasuk high-level. Maka
+                        dari itu di percobaan ketiga akan disesuaikan dan akan dibuat lebih low-level.</p>
+                </div>
+            </div>
+            <br>
+
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Motor direction and speed decision and control2.html" class="hero-btn red-btn">Previous
+                        Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Motor direction and speed decision and control4.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>

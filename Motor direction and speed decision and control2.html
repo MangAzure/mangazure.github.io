@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Seeking Robot- LA71</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/LogoUtama.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="course.html">COURSE</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1><i>Divisi Motor Direction and Speed Decision and Control</i></h1>
+    </section>
+
+    <!-- VGA -->
+
+    <section class="vga">
+        <div class="projectborder">
+            <h2><i> Motor Direction and Speed Decision and Control</i></h2>
+            <br>
+
+            <p> ➤ <strong><i>Hasil dan Analisa</i></strong></p>
+            <br>
+            <p><strong>Percobaan Pertama</strong></p>
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <img src="gambar/mic5.png" style="width: 100%">
+                    <p>Disini adalah architecture untuk membuat direction. Untuk percobaan pertama ini tidak dibuat
+                        implementationnya terlebih dahulu dan langsung dibuat testbench untuk mencoba konsepnya terlebih
+                        dahulu.</p>
+                    <p>Konsepnya disini adalah rangkaian menerima input index atau lokasi, dari index tersebut
+                        dikalkulasikan. Bila indexnya di kiri layar, maka arahnya akan ke kiri dan begitu juga
+                        sebaliknya. Bila indexnya di tengah layar, maka outputnya akan menjadi lurus. </p>
+                    <img src="gambar/mic6.png" style="width: 100%">
+                    <p>Disini terdapat tiga signal yaitu index, speed dan direction. Index dibuat sebagai input dari
+                        komponen light detection. Speed merupakan output untuk kecepatan robot dan direction merupakan
+                        output untuk arah robot. Program ini belum di desain untuk menghitung speed dan hanya direction
+                        untuk mencoba directionnya terlebih dahulu.</p>
+                    <p>Fungsi to_bstring dirancang untuk mengubah tipe data bit menjadi tipe data string agar dapat
+                        di-print.</p>
+                    <img src="gambar/mic7.png" style="width: 100%">
+                    <p>Disinilah proses architecturenya. Pertama index dibagi dengan letak tengah layer (dalam hal ini
+                        160) untuk mendapatkan sisa dari pembagiannya. Bila sisa baginya melebihi 160/3, maka outputnya
+                        akan ke kiri dengan direction(2) = 1 dengan maksud untuk menandakan bahwa itu kiri. Bila sisa
+                        baginya melebihi 160*2/3 maka outputnya akan ke kanan dengan direction(0) = 1 dengan maksud
+                        untuk menandakan bahwa itu ke kanan. Bila kedua kondisi itu salah, maka dia akan ke tengah.</p>
+                    <img src="gambar/mic8.png" style="width: 100%">
+                    <p>Inilah hasil dari rangkaian ini. Tetapi kelemahannya program ini hanya dapat mengirim direction
+                        secara keseluruhan dan tidak mendeskripsikan duty cycle untuk roda kiri dan kanan. Maka dari itu
+                        kita masuk ke percobaan kedua.</p>
+                </div>
+            </div>
+            <br>
+            
+
+            <!-- EDITED -->
+
+            <div class="row-vga1">
+                <div class="vga-1-col">
+                    <a href="Motor direction and speed decision and control1.html" class="hero-btn red-btn">Previous Page</a>
+                </div>
+                <div class="row-vga1">
+                    <div class="vga-1-col">
+                        <a href="Motor direction and speed decision and control3.html" class="hero-btn red-btn">Next
+                            Page</a>
+                    </div>
+                </div>
+    </section>
+    <section class="footer">
+        <h4>About Us</h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>made with <i class="fa fa-heart-o"></i> by LA-71</p>
+    </section>
+
+</body>
+
+</html>
